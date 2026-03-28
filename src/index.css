@@ -141,6 +141,73 @@
   }
 }
 
+/* ── Button system ──────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 18px 32px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8e3b9e 0%, #a971c2 100%);
+  color: #ffffff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(142, 59, 158, 0.18);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(142, 59, 158, 0.28);
+  background: linear-gradient(135deg, #9b46ac 0%, #b882ce 100%);
+}
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(142, 59, 158, 0.18);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 17px 32px;
+  border-radius: 14px;
+  background: transparent;
+  color: #8e3b9e;
+  font-family: "Golos Text", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border: 1.5px solid #8e3b9e;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+.btn-secondary:hover {
+  background: rgba(142, 59, 158, 0.06);
+  color: #6e2c7c;
+  border-color: #6e2c7c;
+  transform: translateY(-1px);
+}
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;

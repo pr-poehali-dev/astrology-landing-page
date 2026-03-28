@@ -73,7 +73,7 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
             <p className="font-body text-white/70 mb-8 max-w-md mx-auto">
               Не уверены, нужна ли консультация? Задайте вопрос — отвечу честно
             </p>
-            <button className="bg-lavender text-white font-body font-medium px-8 py-4 rounded-full hover:opacity-90 transition-all hover:scale-105">
+            <button className="btn-primary">
               Задать бесплатный вопрос
             </button>
           </div>
@@ -112,10 +112,7 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
                   className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                 />
               </div>
-              <button
-                type="submit"
-                className="w-full bg-lavender text-white font-body font-medium py-3.5 rounded-xl hover:opacity-90 transition-all hover:scale-[1.02] mt-2"
-              >
+              <button type="submit" className="btn-primary w-full mt-2">
                 Заказать натальную карту
               </button>
               <p className="text-xs text-muted-foreground font-body text-center">
@@ -124,13 +121,10 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
             </form>
           </div>
           <div className="flex flex-wrap gap-4 justify-center mt-8">
-            <a
-              href="#order"
-              className="bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all"
-            >
+            <a href="#order" className="btn-primary">
               Заказать натальную карту
             </a>
-            <button className="border border-border text-foreground font-body font-medium px-8 py-3.5 rounded-full hover:bg-secondary transition-all">
+            <button className="btn-secondary">
               Задать вопрос
             </button>
           </div>

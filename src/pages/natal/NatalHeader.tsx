@@ -17,10 +17,7 @@ export default function NatalHeader() {
             <a href="#results" className="hover:text-foreground transition-colors">Что получите</a>
             <a href="#order" className="hover:text-foreground transition-colors">Заказать</a>
           </nav>
-          <a
-            href="#order"
-            className="bg-lavender text-white text-sm font-body font-medium px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
-          >
+          <a href="#order" className="btn-primary !py-[10px] !px-5 !text-sm">
             Заказать
           </a>
         </div>
@@ -49,13 +46,10 @@ export default function NatalHeader() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="#order"
-              className="bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all hover:scale-105"
-            >
+            <a href="#order" className="btn-primary">
               Заказать натальную карту
             </a>
-            <button className="border border-border text-foreground font-body font-medium px-8 py-3.5 rounded-full hover:bg-secondary transition-all">
+            <button className="btn-secondary">
               Подарочный сертификат
             </button>
           </div>
@@ -99,10 +93,7 @@ export default function NatalHeader() {
                 На консультации вы получите не общие слова — а конкретные ответы и практические
                 рекомендации именно для вашей ситуации.
               </p>
-              <a
-                href="#order"
-                className="inline-flex items-center gap-2 mt-6 text-white font-body font-medium text-sm border border-white/30 px-5 py-2.5 rounded-full hover:bg-white/10 transition-all"
-              >
+              <a href="#order" className="btn-secondary mt-6 !border-white/40 !text-white hover:!bg-white/10 hover:!text-white hover:!border-white/60 !text-sm">
                 Получить ответы <Icon name="ArrowRight" size={14} />
               </a>
             </div>

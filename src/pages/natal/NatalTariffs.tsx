@@ -80,10 +80,10 @@ export default function NatalTariffs() {
                 </ul>
                 <a
                   href="#order"
-                  className={`block w-full text-center font-body font-medium py-3 rounded-xl transition-all ${
+                  className={`btn-primary w-full text-center ${
                     plan.popular
-                      ? "bg-white text-lavender hover:bg-white/90"
-                      : "bg-lavender text-white hover:opacity-90"
+                      ? "!bg-white !text-[#8E3B9E] hover:!bg-white/90"
+                      : ""
                   }`}
                 >
                   Выбрать
@@ -130,10 +130,7 @@ export default function NatalTariffs() {
               </span>
             </div>
           </div>
-          <a
-            href="#order"
-            className="inline-block mt-10 bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all hover:scale-105"
-          >
+          <a href="#order" className="btn-primary mt-10">
             Заказать натальную карту
           </a>
         </div>
@@ -155,7 +152,7 @@ export default function NatalTariffs() {
             href="https://t.me/"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-white/20 text-white font-body font-medium px-8 py-4 rounded-full hover:bg-white/10 transition-all"
+            className="btn-secondary !border-white/40 !text-white hover:!bg-white/10 hover:!text-white hover:!border-white/60"
           >
             <Icon name="ExternalLink" size={18} />
             Перейти в Telegram канал

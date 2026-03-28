@@ -89,10 +89,7 @@ export default function HomePage() {
             <a href="#process" className="hover:text-foreground transition-colors">Процесс</a>
             <a href="#contacts" className="hover:text-foreground transition-colors">Контакты</a>
           </nav>
-          <a
-            href="#contacts"
-            className="bg-lavender text-white text-sm font-body font-medium px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
-          >
+          <a href="#contacts" className="btn-primary !py-[10px] !px-5 !text-sm">
             Записаться
           </a>
         </div>
@@ -125,13 +122,10 @@ export default function HomePage() {
               ))}
             </ul>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#contacts"
-                className="bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all hover:scale-105"
-              >
+              <a href="#contacts" className="btn-primary">
                 Заказать консультацию
               </a>
-              <button className="border border-border text-foreground font-body font-medium px-8 py-3.5 rounded-full hover:bg-secondary transition-all">
+              <button className="btn-secondary">
                 Подарочный сертификат
               </button>
             </div>
@@ -181,10 +175,7 @@ export default function HomePage() {
               ✦ Этот текст — пример реального анализа, имена и личные данные изменены
             </div>
           </div>
-          <a
-            href="#contacts"
-            className="inline-block mt-10 bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all hover:scale-105"
-          >
+          <a href="#contacts" className="btn-primary mt-10">
             Заказать свой разбор
           </a>
         </div>
@@ -271,13 +262,10 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="flex flex-wrap gap-3">
-                <button className="border border-white/20 text-white font-body text-sm px-6 py-2.5 rounded-full hover:bg-white/10 transition-all">
+                <button className="btn-secondary !border-white/40 !text-white hover:!bg-white/10 hover:!text-white hover:!border-white/60">
                   Узнать мой путь
                 </button>
-                <a
-                  href="#contacts"
-                  className="bg-lavender text-white font-body text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-all"
-                >
+                <a href="#contacts" className="btn-primary">
                   Получить консультацию
                 </a>
               </div>
@@ -333,10 +321,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <a
-            href="#contacts"
-            className="inline-block mt-12 bg-lavender text-white font-body font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all hover:scale-105"
-          >
+          <a href="#contacts" className="btn-primary mt-12">
             Записаться на консультацию
           </a>
         </div>
@@ -381,13 +366,13 @@ export default function HomePage() {
                 {link ? (
                   <Link
                     to={link}
-                    className="text-sm text-lavender font-body font-medium flex items-center gap-1 group-hover:gap-2 transition-all"
+                    className="btn-secondary !py-[9px] !px-4 !text-sm self-start"
                   >
-                    Подробнее <Icon name="ArrowRight" size={14} />
+                    Подробнее
                   </Link>
                 ) : (
-                  <button className="text-sm text-lavender font-body font-medium flex items-center gap-1 hover:gap-2 transition-all">
-                    Подробнее <Icon name="ArrowRight" size={14} />
+                  <button className="btn-secondary !py-[9px] !px-4 !text-sm self-start">
+                    Подробнее
                   </button>
                 )}
                 </div>
@@ -407,10 +392,7 @@ export default function HomePage() {
             <p className="font-body text-white/80 mb-8 max-w-lg mx-auto">
               Запишитесь на консультацию и получите чёткое понимание своего пути
             </p>
-            <a
-              href="#contacts"
-              className="inline-block bg-white text-lavender font-body font-semibold px-10 py-4 rounded-full hover:scale-105 transition-all"
-            >
+            <a href="#contacts" className="btn-primary !bg-white !text-[#8E3B9E] hover:!bg-white/90" style={{background: 'white', color: '#8E3B9E', boxShadow: '0 4px 20px rgba(0,0,0,0.12)'}}>
               Записаться на консультацию
             </a>
           </div>
@@ -500,10 +482,7 @@ export default function HomePage() {
                     className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="w-full bg-lavender text-white font-body font-medium py-3.5 rounded-xl hover:opacity-90 transition-all hover:scale-[1.02] mt-2"
-                >
+                <button type="submit" className="btn-primary w-full mt-2">
                   Отправить заявку
                 </button>
                 <p className="text-xs text-muted-foreground font-body text-center">
