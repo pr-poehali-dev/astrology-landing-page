@@ -151,33 +151,87 @@ export default function HomePage() {
 
       {/* SAMPLE READING */}
       <section className="section-padding bg-lavender-light/40">
-        <div className="container-narrow text-center">
-          <div className="star-divider mb-6">ПРИМЕР РАЗБОРА</div>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
-            Как выглядит ваш анализ
-          </h2>
-          <p className="text-muted-foreground mb-12 max-w-xl mx-auto font-body">
-            Это не шаблонные тексты — каждый разбор составляется индивидуально, с анализом именно вашей карты
-          </p>
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-border text-left max-w-3xl mx-auto">
-            <p className="text-xs font-body uppercase tracking-widest text-lavender mb-6">Фрагмент разбора</p>
-            <h3 className="font-display text-2xl font-light mb-4 text-foreground">Солнце в Рыбах, VIII дом</h3>
-            <p className="text-muted-foreground font-body leading-relaxed mb-4">
-              Ваше предназначение связано с глубинным познанием — вы приходите в этот мир, чтобы помогать людям 
-              проходить через трансформации. Восьмой дом даёт вам интуитивное понимание психологии людей и 
-              умение работать с тем, что другие предпочитают не замечать.
+        <div className="container-narrow">
+          <div className="text-center mb-12">
+            <div className="star-divider mb-6">ПРИМЕР РАЗБОРА</div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
+              Как выглядит ваш анализ
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto font-body">
+              Фрагмент письменного разбора и видео-пояснение — составлены индивидуально, никаких шаблонов
             </p>
-            <p className="text-muted-foreground font-body leading-relaxed">
-              В финансовом плане это указывает на доход через партнёрство или наследство. Важно не замыкаться 
-              на самостоятельной работе — ваши лучшие результаты приходят через объединение ресурсов с другими.
-            </p>
-            <div className="mt-8 pt-6 border-t border-border text-xs text-muted-foreground font-body">
-              ✦ Этот текст — пример реального анализа, имена и личные данные изменены
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Фрагмент текста */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-border h-full flex flex-col">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 rounded-full bg-lavender-light flex items-center justify-center flex-shrink-0">
+                  <Icon name="FileText" size={15} className="text-lavender" />
+                </div>
+                <p className="text-xs font-body uppercase tracking-widest text-lavender font-semibold">Фрагмент письменного разбора</p>
+              </div>
+              <h3 className="font-display text-2xl font-light mb-5 text-foreground">Солнце в Рыбах, VIII дом</h3>
+              <div className="space-y-4 flex-1">
+                <p className="text-muted-foreground font-body leading-relaxed text-[15px]">
+                  Ваше предназначение связано с глубинным познанием — вы приходите в этот мир, чтобы помогать людям
+                  проходить через трансформации. Восьмой дом даёт вам интуитивное понимание психологии людей и
+                  умение работать с тем, что другие предпочитают не замечать.
+                </p>
+                <p className="text-muted-foreground font-body leading-relaxed text-[15px]">
+                  В финансовом плане это указывает на доход через партнёрство или наследство. Важно не замыкаться
+                  на самостоятельной работе — ваши лучшие результаты приходят через объединение ресурсов с другими.
+                </p>
+                <p className="text-muted-foreground font-body leading-relaxed text-[15px]">
+                  Луна в Козероге усиливает самодисциплину, но создаёт внутреннее напряжение между потребностью
+                  в контроле и природной чувствительностью Рыб. Ключевая задача — научиться доверять интуиции,
+                  не требуя от себя логического объяснения каждого решения.
+                </p>
+              </div>
+              <div className="mt-6 pt-5 border-t border-border flex items-center gap-2 text-xs text-muted-foreground font-body">
+                <span className="text-lavender">✦</span>
+                Пример реального анализа — имена и личные данные изменены
+              </div>
+            </div>
+
+            {/* Видео */}
+            <div className="flex flex-col gap-4">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-border">
+                <div className="flex items-center gap-3 px-6 pt-6 pb-4 border-b border-border">
+                  <div className="w-8 h-8 rounded-full bg-lavender-light flex items-center justify-center flex-shrink-0">
+                    <Icon name="Play" size={15} className="text-lavender" />
+                  </div>
+                  <p className="text-xs font-body uppercase tracking-widest text-lavender font-semibold">Видео-пояснение к разбору</p>
+                </div>
+                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    src="https://disk.yandex.ru/i/WJvGYzMiczqkeg/embed"
+                    className="absolute inset-0 w-full h-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                    title="Пример видео-разбора натальной карты"
+                  />
+                </div>
+                <div className="px-6 py-4 flex items-center gap-2 text-xs text-muted-foreground font-body">
+                  <span className="text-lavender">✦</span>
+                  Фрагмент реальной консультации — имена изменены
+                </div>
+              </div>
+              <div className="bg-lavender/8 border border-lavender/20 rounded-2xl px-5 py-4 flex items-start gap-3">
+                <Icon name="Info" size={16} className="text-lavender flex-shrink-0 mt-0.5" />
+                <p className="text-sm font-body text-muted-foreground leading-relaxed">
+                  Ваш разбор будет таким же — письменно (15–30 стр.) плюс видео-пояснение по ключевым моментам
+                </p>
+              </div>
             </div>
           </div>
-          <a href="#contacts" className="btn-primary mt-10">
-            Заказать свой разбор
-          </a>
+
+          <div className="text-center mt-12">
+            <a href="#contacts" className="btn-primary">
+              Заказать свой разбор
+            </a>
+          </div>
         </div>
       </section>
 
