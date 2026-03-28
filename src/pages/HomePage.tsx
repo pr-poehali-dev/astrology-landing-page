@@ -17,21 +17,26 @@ const services = [
     desc: "Полный разбор личности, судьбы и жизненных циклов",
     icon: "Star",
     link: "/natal",
+    popular: true,
+    image: "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/dbbee533-480c-4701-abad-f4af03572ded.jpg",
   },
   {
     title: "Годовой прогноз",
     desc: "Ключевые периоды, возможности и предупреждения на год",
     icon: "Calendar",
+    image: "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/6a168fc5-b536-4325-885a-655fc38f32b6.jpg",
   },
   {
     title: "Профориентация",
     desc: "Найдите своё призвание через астрологический анализ",
     icon: "Briefcase",
+    image: "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/0945eaaa-25eb-4024-83a3-3ceae8ed3ea4.jpg",
   },
   {
     title: "Совместимость",
     desc: "Синастрия пар: сильные стороны и точки роста",
     icon: "Heart",
+    image: "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/a2a6b50c-ff4d-4371-9dcb-478277262e42.jpg",
   },
 ];
 
@@ -348,16 +353,31 @@ export default function HomePage() {
             Выберите то, что актуально для вас прямо сейчас
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {services.map(({ title, desc, icon, link }) => (
+            {services.map(({ title, desc, icon, link, popular, image }) => (
               <div
                 key={title}
-                className="bg-white rounded-2xl p-6 border border-border text-left hover:border-lavender/40 hover:shadow-md transition-all group"
+                className={`bg-white rounded-2xl border text-left hover:shadow-lg transition-all group overflow-hidden relative flex flex-col ${popular ? "border-lavender shadow-md ring-1 ring-lavender/30" : "border-border hover:border-lavender/40"}`}
               >
-                <div className="w-12 h-12 rounded-full bg-lavender-light flex items-center justify-center mb-4">
-                  <Icon name={icon} fallback="Circle" size={22} className="text-lavender" />
+                {popular && (
+                  <div className="absolute top-3 right-3 z-10 bg-lavender text-white text-xs font-body font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span>⭐</span> Популярное
+                  </div>
+                )}
+                {image && (
+                  <div className="w-full h-36 overflow-hidden">
+                    <img
+                      src={image}
+                      alt={title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
+                <div className="p-6 flex flex-col flex-1">
+                <div className="w-10 h-10 rounded-full bg-lavender-light flex items-center justify-center mb-3">
+                  <Icon name={icon} fallback="Circle" size={18} className="text-lavender" />
                 </div>
                 <h3 className="font-display text-xl font-light text-foreground mb-2">{title}</h3>
-                <p className="text-sm text-muted-foreground font-body mb-4">{desc}</p>
+                <p className="text-sm text-muted-foreground font-body mb-4 flex-1">{desc}</p>
                 {link ? (
                   <Link
                     to={link}
@@ -370,6 +390,7 @@ export default function HomePage() {
                     Подробнее <Icon name="ArrowRight" size={14} />
                   </button>
                 )}
+                </div>
               </div>
             ))}
           </div>
