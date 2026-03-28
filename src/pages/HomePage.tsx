@@ -70,9 +70,25 @@ const faqs = [
 
 export default function HomePage() {
   const [form, setForm] = useState({ name: "", phone: "" });
+  const [messenger, setMessenger] = useState<"telegram" | "whatsapp" | "max" | null>(null);
+
+  const messengerLinks = {
+    telegram: "https://t.me/astrologer",
+    whatsapp: "https://wa.me/79990000000",
+    max: "https://max.ru/astrologer",
+  };
+
+  const messengerLabels = {
+    telegram: "Напишу вам в Telegram",
+    whatsapp: "Напишу вам в WhatsApp",
+    max: "Напишу вам в Max",
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!messenger) return;
+    const url = messengerLinks[messenger];
+    window.open(url, "_blank");
   };
 
   return (
@@ -512,22 +528,32 @@ export default function HomePage() {
               </div>
             </div>
             <div className="bg-white rounded-3xl p-8 border border-border shadow-sm">
-              <h3 className="font-display text-2xl font-light text-foreground mb-6">
+              <h3 className="font-display text-2xl font-light text-foreground mb-2">
                 Оставить заявку
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <p className="text-sm font-body text-muted-foreground mb-7 leading-relaxed">
+                Заполните форму — я свяжусь с вами в удобный мессенджер
+              </p>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Имя */}
                 <div>
                   <label className="block text-sm font-body text-muted-foreground mb-2">Ваше имя</label>
                   <input
                     type="text"
+                    required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Как вас зовут?"
                     className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                   />
                 </div>
+
+                {/* Телефон (необязательно) */}
                 <div>
-                  <label className="block text-sm font-body text-muted-foreground mb-2">Телефон</label>
+                  <div className="flex items-center gap-2 mb-2">
+                    <label className="text-sm font-body text-muted-foreground">Телефон</label>
+                    <span className="text-xs font-body text-muted-foreground/60 bg-muted px-2 py-0.5 rounded-full">необязательно</span>
+                  </div>
                   <input
                     type="tel"
                     value={form.phone}
@@ -536,12 +562,64 @@ export default function HomePage() {
                     className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full mt-2">
+
+                {/* Способ связи */}
+                <div>
+                  <label className="block text-sm font-body text-muted-foreground mb-3">Где вам удобнее общаться?</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(["telegram", "whatsapp", "max"] as const).map((m) => {
+                      const icons = { telegram: "Send", whatsapp: "MessageCircle", max: "Zap" };
+                      const labels = { telegram: "Telegram", whatsapp: "WhatsApp", max: "Max" };
+                      const isActive = messenger === m;
+                      return (
+                        <button
+                          key={m}
+                          type="button"
+                          onClick={() => setMessenger(m)}
+                          className={`flex flex-col items-center gap-1.5 py-3.5 px-2 rounded-xl border-2 transition-all font-body text-sm font-medium cursor-pointer ${
+                            isActive
+                              ? "border-lavender bg-lavender/8 text-lavender shadow-sm"
+                              : "border-border text-muted-foreground hover:border-lavender/40 hover:text-foreground"
+                          }`}
+                        >
+                          <Icon name={icons[m]} fallback="Circle" size={18} className={isActive ? "text-lavender" : ""} />
+                          {labels[m]}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Подсказка о выбранном мессенджере */}
+                {messenger && (
+                  <div className="flex items-center gap-2 bg-lavender/8 border border-lavender/20 rounded-xl px-4 py-3">
+                    <Icon name="CheckCircle" size={15} className="text-lavender flex-shrink-0" />
+                    <p className="text-sm font-body text-lavender">{messengerLabels[messenger]}</p>
+                  </div>
+                )}
+
+                {/* Кнопка */}
+                <button
+                  type="submit"
+                  disabled={!messenger}
+                  className={`w-full py-4 rounded-xl font-body font-medium text-base transition-all ${
+                    messenger
+                      ? "btn-primary cursor-pointer"
+                      : "bg-muted text-muted-foreground cursor-not-allowed"
+                  }`}
+                >
                   Отправить заявку
                 </button>
-                <p className="text-xs text-muted-foreground font-body text-center">
-                  Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности
-                </p>
+
+                {/* Подписи */}
+                <div className="text-center space-y-1.5 pt-1">
+                  <p className="text-xs text-muted-foreground font-body font-medium">
+                    Вы сами выбираете удобный способ связи
+                  </p>
+                  <p className="text-xs text-muted-foreground/60 font-body">
+                    Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности
+                  </p>
+                </div>
               </form>
             </div>
           </div>
