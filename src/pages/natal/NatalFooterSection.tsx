@@ -1,27 +1,61 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { trustCards, reviews, freeQuestionPoints } from "./NatalPage.data";
 
-const ASTROLOGER_PHOTO = "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/2de1405a-7d04-46d9-a364-78992feb0287.jpg";
+const ASTROLOGER_PHOTO = "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/061d7845-2b46-409b-a1dd-dbea0da35874.jpg";
 
-interface NatalFooterSectionProps {
-  form: { name: string; phone: string };
-  setForm: (form: { name: string; phone: string }) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-}
-
-export default function NatalFooterSection({ form, setForm, handleSubmit }: NatalFooterSectionProps) {
+export default function NatalFooterSection() {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    question: "",
+  });
   const [messenger, setMessenger] = useState<"telegram" | "whatsapp" | "max" | null>(null);
-  const [question, setQuestion] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!messenger) return;
+    const links = {
+      telegram: "https://t.me/astrologer",
+      whatsapp: "https://wa.me/79990000000",
+      max: "https://max.ru/astrologer",
+    };
+    window.open(links[messenger], "_blank");
+  };
 
   return (
     <>
-      {/* ABOUT */}
+      <section id="trust" className="section-padding bg-white/50">
+        <div className="container-narrow">
+          <div className="text-center mb-14">
+            <div className="star-divider mb-6">ДОВЕРИЕ</div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
+              Почему мне доверяют
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {trustCards.map(({ icon, title, desc }) => (
+              <div
+                key={title}
+                className="bg-white rounded-2xl p-7 border border-border/80 hover:border-lavender/30 transition-all duration-300"
+              >
+                <div className="w-11 h-11 rounded-xl bg-lavender/8 flex items-center justify-center mb-4">
+                  <Icon name={icon} fallback="Circle" size={20} className="text-lavender" />
+                </div>
+                <h3 className="font-display text-lg font-light text-foreground mb-2">{title}</h3>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="section-padding">
         <div className="container-narrow max-w-4xl">
-          <div className="grid md:grid-cols-[280px_1fr] gap-10 lg:gap-14 items-center">
-            <div className="mx-auto md:mx-0">
-              <div className="w-[240px] h-[280px] md:w-[280px] md:h-[320px] rounded-3xl overflow-hidden border border-border shadow-sm">
+          <div className="grid md:grid-cols-5 gap-10 md:gap-14 items-center">
+            <div className="md:col-span-2 flex justify-center">
+              <div className="w-64 h-64 md:w-72 md:h-72 rounded-3xl overflow-hidden border-2 border-lavender/15 shadow-lg">
                 <img
                   src={ASTROLOGER_PHOTO}
                   alt="Астролог"
@@ -29,84 +63,127 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
                 />
               </div>
             </div>
-            <div>
+            <div className="md:col-span-3">
               <div className="star-divider mb-6 justify-start">ОБО МНЕ</div>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-5">
-                Кто будет составлять вашу карту
+              <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-6">
+                Кто будет работать с вашей картой
               </h2>
-              <p className="font-body text-muted-foreground leading-relaxed mb-4">
-                Астрология помогла мне найти своё направление в жизни — после 12 лет работы в совершенно другой сфере. Именно поэтому в каждом разборе для меня важно не просто описать карту, а помочь человеку увидеть реальные решения.
-              </p>
-              <p className="font-body text-muted-foreground leading-relaxed mb-6">
-                Профильное образование, более 9 лет практики, тысячи консультаций. Работаю с клиентами из России, Европы и США. Объясняю простым языком — без эзотерического жаргона, с акцентом на практику.
-              </p>
-              <div className="flex flex-wrap gap-4 mb-6">
-                {[
-                  { value: "9+", label: "лет практики" },
-                  { value: "1000+", label: "консультаций" },
-                  { value: "30", label: "дней поддержки" },
-                ].map(({ value, label }) => (
-                  <div key={label} className="text-center">
-                    <span className="font-display text-2xl text-lavender font-light">{value}</span>
-                    <p className="font-body text-xs text-muted-foreground mt-0.5">{label}</p>
-                  </div>
-                ))}
+              <div className="space-y-4 font-body text-muted-foreground leading-relaxed">
+                <p>
+                  Астрология помогла мне найти своё направление в жизни. После 12 лет
+                  работы бухгалтером я понимала, что живу не свою жизнь — натальная карта
+                  показала, почему так происходило и куда двигаться дальше.
+                </p>
+                <p>
+                  Сейчас у меня за плечами более 9 лет практики, профильное образование
+                  (академия Шестопалова) и тысячи консультаций. В работе мне важно не просто
+                  описать карту — а помочь человеку увидеть реальные решения для своей жизни.
+                </p>
               </div>
               <Link
                 to="/"
-                className="text-lavender font-body font-medium text-sm flex items-center gap-2 hover:opacity-80 transition-opacity"
+                className="inline-flex items-center gap-2 mt-6 text-lavender font-body font-medium hover:opacity-80 transition-opacity"
               >
-                Подробнее обо мне <Icon name="ArrowRight" size={14} />
+                Узнать мой путь <Icon name="ArrowRight" size={16} />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FREE QUESTION */}
-      <section id="free-question" className="section-padding bg-white/60">
-        <div className="container-narrow max-w-3xl">
-          <div className="bg-background rounded-3xl p-8 md:p-12 border border-border text-center">
-            <div className="w-14 h-14 rounded-full bg-lavender-light flex items-center justify-center mx-auto mb-6">
-              <Icon name="MessageCircle" size={24} className="text-lavender" />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-4">
-              Остались сомнения? Начните с одного вопроса
+      <section className="section-padding bg-white/50">
+        <div className="container-narrow">
+          <div className="text-center mb-14">
+            <div className="star-divider mb-6">ОТЗЫВЫ</div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
+              Что говорят клиенты
             </h2>
-            <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed">
-              Вы можете задать один короткий вопрос бесплатно, чтобы понять мой подход и получить первый ориентир
+          </div>
+          <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+            {reviews.map(({ name, age, text }) => (
+              <div
+                key={name}
+                className="bg-white rounded-2xl p-7 border border-border/80"
+              >
+                <div className="flex items-center gap-1.5 mb-5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Icon key={i} name="Star" size={14} className="text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <p className="font-body text-muted-foreground leading-relaxed mb-6 text-sm">
+                  «{text}»
+                </p>
+                <div className="flex items-center gap-3 pt-5 border-t border-border/60">
+                  <div className="w-9 h-9 rounded-full bg-lavender/10 flex items-center justify-center">
+                    <span className="font-display text-sm text-lavender">{name[0]}</span>
+                  </div>
+                  <div>
+                    <p className="font-body text-sm font-medium text-foreground">{name}</p>
+                    <p className="font-body text-xs text-muted-foreground">{age}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <a
+              href="https://t.me/astrologer_reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary !text-sm"
+            >
+              <Icon name="MessageCircle" size={16} />
+              Смотреть все отзывы в Telegram
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="free-question" className="section-padding">
+        <div className="container-narrow max-w-3xl">
+          <div className="bg-foreground rounded-3xl p-10 md:p-16 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-lavender/20 flex items-center justify-center mx-auto mb-6">
+              <Icon name="MessageSquare" size={26} className="text-lavender" />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-4">
+              Остались сомнения?<br />Начните с одного вопроса
+            </h2>
+            <p className="font-body text-white/60 mb-8 max-w-md mx-auto leading-relaxed">
+              Вы можете задать один короткий вопрос бесплатно, чтобы понять мой подход
+              и получить первый ориентир
             </p>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-8">
-              {[
-                { icon: "User", text: "Отвечаю лично" },
-                { icon: "CircleDollarSign", text: "Без оплаты" },
-                { icon: "Unlock", text: "Без обязательств" },
-                { icon: "FileText", text: "С практическим комментарием" },
-              ].map(({ icon, text }) => (
-                <span key={text} className="flex items-center gap-2 text-sm font-body text-muted-foreground">
-                  <Icon name={icon} fallback="Check" size={14} className="text-lavender flex-shrink-0" />
-                  {text}
-                </span>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-10">
+              {freeQuestionPoints.map((point) => (
+                <div key={point} className="flex items-center gap-2 text-sm font-body text-white/70">
+                  <Icon name="Check" size={13} className="text-lavender" />
+                  <span>{point}</span>
+                </div>
               ))}
             </div>
-            <a href="#order" className="btn-primary">
+            <a
+              href="https://t.me/astrologer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
               Задать первый вопрос
             </a>
           </div>
         </div>
       </section>
 
-      {/* ORDER FORM */}
-      <section id="order" className="section-padding">
-        <div className="container-narrow max-w-xl text-center">
-          <div className="star-divider mb-6">ЗАЯВКА</div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-4">
-            Оставьте заявку на натальную карту
-          </h2>
-          <p className="font-body text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
-            Напишите, что вас сейчас особенно волнует, и я подскажу, какой формат подойдёт именно вам
-          </p>
-          <div className="bg-white rounded-3xl p-7 md:p-8 border border-border shadow-sm text-left">
+      <section id="order" className="section-padding bg-white/50">
+        <div className="container-narrow max-w-xl">
+          <div className="text-center mb-10">
+            <div className="star-divider mb-6">ЗАЯВКА</div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
+              Оставьте заявку на натальную карту
+            </h2>
+            <p className="font-body text-muted-foreground max-w-md mx-auto leading-relaxed">
+              Напишите, что вас сейчас особенно волнует, и я подскажу, какой формат подойдёт именно вам
+            </p>
+          </div>
+          <div className="bg-white rounded-3xl p-7 md:p-9 border border-border/80 shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-sm font-body text-muted-foreground mb-2">
@@ -134,9 +211,10 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
                   className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-body text-muted-foreground mb-3">Удобный мессенджер</label>
+                <label className="block text-sm font-body text-muted-foreground mb-3">
+                  Где вам удобнее общаться?
+                </label>
                 <div className="grid grid-cols-3 gap-2">
                   {(["telegram", "whatsapp", "max"] as const).map((m) => {
                     const icons = { telegram: "Send", whatsapp: "MessageCircle", max: "Zap" };
@@ -160,20 +238,18 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
                   })}
                 </div>
               </div>
-
               <div>
                 <label className="block text-sm font-body text-muted-foreground mb-2">
                   Коротко опишите ваш вопрос
                 </label>
                 <textarea
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  placeholder="Что вас сейчас волнует? Чем могу помочь?"
+                  value={form.question}
+                  onChange={(e) => setForm({ ...form, question: e.target.value })}
+                  placeholder="Что вас сейчас волнует? Можно в свободной форме"
                   rows={3}
                   className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all resize-none"
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={!messenger}
@@ -193,13 +269,12 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-border/60 py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <Link to="/" className="font-display text-lg font-light text-foreground">
             ✦ Астролог
           </Link>
-          <p className="text-sm text-muted-foreground font-body">© 2025 Все права защищены</p>
+          <p className="text-sm text-muted-foreground font-body">© 2024 Все права защищены</p>
           <Link
             to="/"
             className="text-sm text-lavender font-body hover:opacity-80 transition-opacity"
