@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
-import { advantages } from "./NatalPage.data";
+
+const ASTROLOGER_PHOTO = "https://cdn.poehali.dev/projects/e978728c-c5bf-41ce-8d58-8d1e2acd2552/files/2de1405a-7d04-46d9-a364-78992feb0287.jpg";
 
 interface NatalFooterSectionProps {
   form: { name: string; phone: string };
@@ -9,101 +11,121 @@ interface NatalFooterSectionProps {
 }
 
 export default function NatalFooterSection({ form, setForm, handleSubmit }: NatalFooterSectionProps) {
+  const [messenger, setMessenger] = useState<"telegram" | "whatsapp" | "max" | null>(null);
+  const [question, setQuestion] = useState("");
+
   return (
     <>
-      {/* ADVANTAGES */}
-      <section className="section-padding">
-        <div className="container-narrow">
-          <div className="text-center mb-12">
-            <div className="star-divider mb-6">ПОЧЕМУ Я</div>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground">
-              Преимущества
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-5 gap-4">
-            {advantages.map(({ icon, title, desc }) => (
-              <div
-                key={title}
-                className="bg-white rounded-2xl p-5 border border-border text-center hover:border-lavender/40 hover:shadow-sm transition-all"
-              >
-                <div className="w-12 h-12 rounded-full bg-lavender-light flex items-center justify-center mx-auto mb-3">
-                  <Icon name={icon} fallback="Circle" size={20} className="text-lavender" />
-                </div>
-                <p className="font-body font-medium text-foreground text-sm mb-1">{title}</p>
-                <p className="font-body text-xs text-muted-foreground leading-relaxed">{desc}</p>
+      {/* ABOUT */}
+      <section id="about" className="section-padding">
+        <div className="container-narrow max-w-4xl">
+          <div className="grid md:grid-cols-[280px_1fr] gap-10 lg:gap-14 items-center">
+            <div className="mx-auto md:mx-0">
+              <div className="w-[240px] h-[280px] md:w-[280px] md:h-[320px] rounded-3xl overflow-hidden border border-border shadow-sm">
+                <img
+                  src={ASTROLOGER_PHOTO}
+                  alt="Астролог"
+                  className="w-full h-full object-cover"
+                />
               </div>
-            ))}
+            </div>
+            <div>
+              <div className="star-divider mb-6 justify-start">ОБО МНЕ</div>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-5">
+                Кто будет составлять вашу карту
+              </h2>
+              <p className="font-body text-muted-foreground leading-relaxed mb-4">
+                Астрология помогла мне найти своё направление в жизни — после 12 лет работы в совершенно другой сфере. Именно поэтому в каждом разборе для меня важно не просто описать карту, а помочь человеку увидеть реальные решения.
+              </p>
+              <p className="font-body text-muted-foreground leading-relaxed mb-6">
+                Профильное образование, более 9 лет практики, тысячи консультаций. Работаю с клиентами из России, Европы и США. Объясняю простым языком — без эзотерического жаргона, с акцентом на практику.
+              </p>
+              <div className="flex flex-wrap gap-4 mb-6">
+                {[
+                  { value: "9+", label: "лет практики" },
+                  { value: "1000+", label: "консультаций" },
+                  { value: "30", label: "дней поддержки" },
+                ].map(({ value, label }) => (
+                  <div key={label} className="text-center">
+                    <span className="font-display text-2xl text-lavender font-light">{value}</span>
+                    <p className="font-body text-xs text-muted-foreground mt-0.5">{label}</p>
+                  </div>
+                ))}
+              </div>
+              <Link
+                to="/"
+                className="text-lavender font-body font-medium text-sm flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                Подробнее обо мне <Icon name="ArrowRight" size={14} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT SHORT */}
-      <section className="section-padding bg-lavender-light/20">
-        <div className="container-narrow max-w-3xl text-center">
-          <div className="star-divider mb-6">ОБО МНЕ</div>
-          <h2 className="font-display text-4xl font-light text-foreground mb-6">
-            Кто будет составлять вашу карту
-          </h2>
-          <p className="font-body text-muted-foreground leading-relaxed mb-4">
-            Меня зовут [Имя]. Я профессиональный астролог с опытом более 9 лет,
-            выпускница академии Шестопалова. Работаю с клиентами из России, Европы и США.
-          </p>
-          <p className="font-body text-muted-foreground leading-relaxed mb-8">
-            Я пришла в астрологию после 12 лет работы бухгалтером. Я сама искала ответы —
-            и нашла их. Теперь помогаю другим сделать то же самое: без мистики,
-            без сложных терминов, только практически.
-          </p>
-          <Link
-            to="/"
-            className="text-lavender font-body font-medium flex items-center gap-2 justify-center hover:opacity-80 transition-opacity"
-          >
-            Читать мою историю подробнее <Icon name="ArrowRight" size={16} />
-          </Link>
-        </div>
-      </section>
-
-      {/* LEAD MAGNET */}
-      <section className="section-padding">
+      {/* FREE QUESTION */}
+      <section id="free-question" className="section-padding bg-white/60">
         <div className="container-narrow max-w-3xl">
-          <div className="bg-foreground rounded-3xl p-10 md:p-14 text-center text-white">
-            <Icon name="Gift" size={36} className="text-lavender mx-auto mb-4" />
-            <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-4">
-              Можно задать 1 вопрос бесплатно
+          <div className="bg-background rounded-3xl p-8 md:p-12 border border-border text-center">
+            <div className="w-14 h-14 rounded-full bg-lavender-light flex items-center justify-center mx-auto mb-6">
+              <Icon name="MessageCircle" size={24} className="text-lavender" />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-light text-foreground mb-4">
+              Остались сомнения? Начните с одного вопроса
             </h2>
-            <p className="font-body text-white/70 mb-8 max-w-md mx-auto">
-              Не уверены, нужна ли консультация? Задайте вопрос — отвечу честно
+            <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto leading-relaxed">
+              Вы можете задать один короткий вопрос бесплатно, чтобы понять мой подход и получить первый ориентир
             </p>
-            <button className="btn-primary">
-              Задать бесплатный вопрос
-            </button>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-8">
+              {[
+                { icon: "User", text: "Отвечаю лично" },
+                { icon: "CircleDollarSign", text: "Без оплаты" },
+                { icon: "Unlock", text: "Без обязательств" },
+                { icon: "FileText", text: "С практическим комментарием" },
+              ].map(({ icon, text }) => (
+                <span key={text} className="flex items-center gap-2 text-sm font-body text-muted-foreground">
+                  <Icon name={icon} fallback="Check" size={14} className="text-lavender flex-shrink-0" />
+                  {text}
+                </span>
+              ))}
+            </div>
+            <a href="#order" className="btn-primary">
+              Задать первый вопрос
+            </a>
           </div>
         </div>
       </section>
 
       {/* ORDER FORM */}
-      <section id="order" className="section-padding bg-lavender-light/20">
+      <section id="order" className="section-padding">
         <div className="container-narrow max-w-xl text-center">
           <div className="star-divider mb-6">ЗАЯВКА</div>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
-            Заказать натальную карту
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-foreground mb-4">
+            Оставьте заявку на натальную карту
           </h2>
-          <p className="font-body text-muted-foreground mb-10">
-            Оставьте контакты — свяжусь в течение нескольких часов
+          <p className="font-body text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
+            Напишите, что вас сейчас особенно волнует, и я подскажу, какой формат подойдёт именно вам
           </p>
-          <div className="bg-white rounded-3xl p-8 border border-border shadow-sm text-left">
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="bg-white rounded-3xl p-7 md:p-8 border border-border shadow-sm text-left">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-body text-muted-foreground mb-2">Ваше имя</label>
+                <label className="block text-sm font-body text-muted-foreground mb-2">
+                  Имя или никнейм в Telegram
+                </label>
                 <input
                   type="text"
+                  required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Как вас зовут?"
+                  placeholder="Как к вам обращаться?"
                   className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                 />
               </div>
               <div>
-                <label className="block text-sm font-body text-muted-foreground mb-2">Телефон</label>
+                <div className="flex items-center gap-2 mb-2">
+                  <label className="text-sm font-body text-muted-foreground">Телефон</label>
+                  <span className="text-xs font-body text-muted-foreground/60 bg-muted px-2 py-0.5 rounded-full">необязательно</span>
+                </div>
                 <input
                   type="tel"
                   value={form.phone}
@@ -112,32 +134,72 @@ export default function NatalFooterSection({ form, setForm, handleSubmit }: Nata
                   className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all"
                 />
               </div>
-              <button type="submit" className="btn-primary w-full mt-2">
-                Заказать натальную карту
+
+              <div>
+                <label className="block text-sm font-body text-muted-foreground mb-3">Удобный мессенджер</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(["telegram", "whatsapp", "max"] as const).map((m) => {
+                    const icons = { telegram: "Send", whatsapp: "MessageCircle", max: "Zap" };
+                    const labels = { telegram: "Telegram", whatsapp: "WhatsApp", max: "Max" };
+                    const isActive = messenger === m;
+                    return (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => setMessenger(m)}
+                        className={`flex flex-col items-center gap-1.5 py-3.5 px-2 rounded-xl border-2 transition-all font-body text-sm font-medium cursor-pointer ${
+                          isActive
+                            ? "border-lavender bg-lavender/8 text-lavender shadow-sm"
+                            : "border-border text-muted-foreground hover:border-lavender/40 hover:text-foreground"
+                        }`}
+                      >
+                        <Icon name={icons[m]} fallback="Circle" size={18} className={isActive ? "text-lavender" : ""} />
+                        {labels[m]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-body text-muted-foreground mb-2">
+                  Коротко опишите ваш вопрос
+                </label>
+                <textarea
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  placeholder="Что вас сейчас волнует? Чем могу помочь?"
+                  rows={3}
+                  className="w-full px-4 py-3 rounded-xl border border-border font-body text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-lavender/30 focus:border-lavender/50 transition-all resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!messenger}
+                className={`w-full py-4 rounded-xl font-body font-medium text-base transition-all ${
+                  messenger
+                    ? "btn-primary cursor-pointer"
+                    : "bg-muted text-muted-foreground cursor-not-allowed"
+                }`}
+              >
+                Отправить заявку
               </button>
-              <p className="text-xs text-muted-foreground font-body text-center">
-                Нажимая «Заказать», вы соглашаетесь с политикой конфиденциальности
+              <p className="text-xs text-muted-foreground/60 font-body text-center">
+                Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности
               </p>
             </form>
-          </div>
-          <div className="flex flex-wrap gap-4 justify-center mt-8">
-            <a href="#order" className="btn-primary">
-              Заказать натальную карту
-            </a>
-            <button className="btn-secondary">
-              Задать вопрос
-            </button>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-border py-8 px-4">
+      <footer className="border-t border-border/60 py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <Link to="/" className="font-display text-lg font-light text-foreground">
             ✦ Астролог
           </Link>
-          <p className="text-sm text-muted-foreground font-body">© 2024 Все права защищены</p>
+          <p className="text-sm text-muted-foreground font-body">© 2025 Все права защищены</p>
           <Link
             to="/"
             className="text-sm text-lavender font-body hover:opacity-80 transition-opacity"
